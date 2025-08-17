@@ -77,4 +77,51 @@ def ingresar():
     productoAux = Productos(nombreAux, categoriaAux, precioAux, stockAux)
     productosDiccionario[codigoAux] = {"producto": productoAux}
 
-ingresar()
+def quicksort(lista, clave):
+    if len(lista) <= 1:
+        return lista
+    else:
+        pivote = lista[0]
+        menores = [x for x in lista[1:] if x[clave] <= pivote[clave]]
+        mayores = [x for x in lista[1:] if x[clave] > pivote[clave]]
+        return quicksort(menores, clave) + [pivote] + quicksort(mayores, clave)
+
+def listar_productos():
+    if not productosDiccionario:
+        print("No hay productos registrados.")
+        return
+
+
+    lista_productos = []
+    for datos in productosDiccionario.values():
+        p = datos["producto"]
+        lista_productos.append({
+            "nombre": p.nombre,
+            "categoria": p.categoria,
+            "precio": p.precio,
+            "stock": p.stock
+        })
+
+    print("Opciones de ordenamiento:")
+    print("1. Nombre")
+    print("2. Precio")
+    print("3. Stock")
+
+    opcion = input("Elija el ordenamiento: ")
+
+    if opcion == "1":
+        ordenados = quicksort(lista_productos, "nombre")
+    elif opcion == "2":
+        ordenados = quicksort(lista_productos, "precio")
+    elif opcion == "3":
+        ordenados = quicksort(lista_productos, "stock")
+    else:
+        print("Opción inválida. Se mostrará sin ordenar.")
+        ordenados = lista_productos
+
+    print("--- LISTA DE PRODUCTOS ---")
+    for p in ordenados:
+        print(f"Nombre: {p['nombre']} | "
+              f"Categoría: {p['categoria']} | "
+              f"Precio: {p['precio']} | "
+              f"Stock: {p['stock']}")
