@@ -61,7 +61,7 @@ def ingresar():
             else:
                 print("El stock no puede ser menor a 0")
         except ValueError:
-            print("El stock debe ser ingresado en numeros enteros")
+            print("El stock debe ser ingresado en numeros enteros:")
     productoAux=Productos(nombreAux,categoriaAux,precioAux,stockAux)
     productosDiccionario[codigoAux]={
         "producto": productoAux
