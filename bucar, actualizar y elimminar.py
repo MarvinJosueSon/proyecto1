@@ -105,6 +105,49 @@ class Buscador:
         print("\nNo se encontró ningún producto con ese código.")
         return None
 
+
+
+class actualizar_producto:
+    def __init__(self, productosDiccionario):
+        self.productosDiccionario = productosDiccionario
+
+    def actualizar(self):
+        codigo = input("Ingrese el codigo del producto a actualizar: ")
+
+        if codigo in self.productosDiccionario:
+            producto = self.productosDiccionario[codigo]["producto"]
+            print("\nproducto encontado:")
+            print(f"Mombre: {producto.nombre}, Categoría: {producto.categoria}, Precio: {producto.precio}, Stock: {producto.stock}")
+
+            while True:
+                try:
+                    precio_nuevo = float(input("Ingrese el nuevo precio: "))
+                    if precio_nuevo > 0:
+                        producto.precio = precio_nuevo
+                        break
+                    else:
+                        print("el precio debe ser mayor a 0.")
+                except ValueError:
+                    print("ERROR...ingrese un numero valido para el precio.")
+
+            while True:
+                try:
+                    stock_nuevo = int(input("imgrese el nuevo stock: "))
+                    if stock_nuevo >= 0:
+                        producto.stock = stock_nuevo
+                        break
+                    else:
+                        print("el stock no puede ser negativo.")
+                except ValueError:
+                    print("ERROR...ingrese un numero valido para el stock.")
+
+            print("\nPRODUCTO ACTUALIZADO CORRECTAMENTE...")
+        else:
+            print("\nERROR---NO SE ENCONTRO EL PRODUCTO---")
+
 ingresar()
+print()
 buscador = Buscador(productosDiccionario)
 buscador.buscar_por_codigo()
+actualizador = actualizar_producto(productosDiccionario)
+actualizador.actualizar()
