@@ -1,68 +1,80 @@
 productosDiccionario = {}
+
 class Productos:
-    def __init__(self,nombre,categoria,precio,stock):
+    def __init__(self, nombre, categoria, precio, stock):
         self.nombre = nombre
         self.categoria = categoria
         self.precio = precio
         self.stock = stock
-def ingresar():
+
+
+def validar_codigo():
     while True:
-        try:
-            codigoAux=input("Ingrese el codigo del producto: ")
-            if not codigoAux in productosDiccionario:
-                break
-            else:
-                print("El codigo del producto ya existe")
-        except ValueError:
-            print("El codigo del producto no existe")
+        codigo = input("Ingrese el código del producto: ")
+        if codigo not in productosDiccionario:
+            return codigo
+        else:
+            print("El código del producto ya existe")
+
+
+def validar_nombre():
     while True:
-        try:
-            nombreAux=input("Ingrese el nombre del producto: ")
-            if nombreAux != "" :
-                break
-            else:
-                print("El nombre no puede estar en blanco")
-        except ValueError:
+        nombre = input("Ingrese el nombre del producto: ")
+        if nombre.strip() != "":
+            return nombre
+        else:
             print("El nombre no puede estar en blanco")
+
+
+def validar_categoria():
+    while True:
+        print("Categorías disponibles: ")
+        print("1. Encendedores")
+        print("2. Puros")
+        print("3. Miselianas")
+        opcion = input("Ingrese el número de categoría: ")
+        if opcion == "1":
+            return "Encendedores"
+        elif opcion == "2":
+            return "Puros"
+        elif opcion == "3":
+            return "Miselianas"
+        else:
+            print("Categoría no existente")
+
+
+def validar_precio():
     while True:
         try:
-            print("Categorias disponibles: ")
-            print("1. Encendedores")
-            print("2. Puros")
-            print("3. Miselianas")
-            opcion=input("Ingrese el numero de categoria")
-            if opcion == "1":
-                categoriaAux="Encendedores"
-                break
-            elif opcion == "2":
-                categoriaAux="Puros"
-                break
-            elif opcion == "3":
-                categoriaAux="Miselianas"
-                break
+            precio = float(input("Ingrese el precio del producto: "))
+            if precio > 0:
+                return precio
             else:
-                print("Categoria no existente")
+                print("El precio no puede ser menor o igual a 0")
         except ValueError:
-            print("Categoria no existente")
+            print("El precio debe ser ingresado en números")
+
+
+def validar_stock():
     while True:
         try:
-            precioAux=float(input("Ingrese el precio del producto: "))
-            if precioAux>0:
-                break
+            stock = int(input("Ingrese el stock del producto: "))
+            if stock > 0:
+                return stock
             else:
-                print("El precio no puede ser menor a 0")
+                print("El stock no puede ser menor o igual a 0")
         except ValueError:
-            print("El precio debe ser ingresado en numeros")
-    while True:
-        try:
-            stockAux=int(input("Ingrese el stock del producto: "))
-            if stockAux>0:
-                break
-            else:
-                print("El stock no puede ser menor a 0")
-        except ValueError:
-            print("El stock debe ser ingresado en numeros enteros:")
-    productoAux=Productos(nombreAux,categoriaAux,precioAux,stockAux)
-    productosDiccionario[codigoAux]={
-        "producto": productoAux
-    }
+            print("El stock debe ser ingresado en números enteros")
+
+
+def ingresar():
+    codigoAux = validar_codigo()
+    nombreAux = validar_nombre()
+    categoriaAux = validar_categoria()
+    precioAux = validar_precio()
+    stockAux = validar_stock()
+
+    productoAux = Productos(nombreAux, categoriaAux, precioAux, stockAux)
+    productosDiccionario[codigoAux] = {"producto": productoAux}
+
+ingresar()
