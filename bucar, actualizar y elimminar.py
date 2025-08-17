@@ -2,11 +2,12 @@
 productosDiccionario = {}
 
 class Productos:
-    def _init_(self, nombre, categoria, precio, stock):
+    def __init__(self, nombre, categoria, precio, stock, codigo):
         self.nombre = nombre
         self.categoria = categoria
         self.precio = precio
         self.stock = stock
+        self.codigo = codigo
 
 
 def validar_codigo():
@@ -75,5 +76,35 @@ def ingresar():
     precioAux = validar_precio()
     stockAux = validar_stock()
 
-    productoAux = Productos(nombreAux, categoriaAux, precioAux, stockAux)
+    productoAux = Productos(nombreAux, categoriaAux, precioAux, stockAux, codigoAux)
     productosDiccionario[codigoAux] = {"producto": productoAux}
+
+
+
+
+
+#MI PARTE DEL PROYECTO
+class Buscador:
+    def __init__(self, productosDiccionario):
+        self.productosDiccionario = productosDiccionario
+
+    def buscar_por_codigo(self):
+        codigo = input("Ingrese el codigo del producto a buscar: ")
+
+        for cod, datos in self.productosDiccionario.items():
+            producto = datos["producto"]
+            if cod == codigo:
+                print("\nProducto encontrado:")
+                print(f"Codigo: {producto.codigo}")
+                print(f"Nombre: {producto.nombre}")
+                print(f"Categoria: {producto.categoria}")
+                print(f"Precio: {producto.precio}")
+                print(f"Stock: {producto.stock}")
+                return producto
+
+        print("\nNo se encontró ningún producto con ese código.")
+        return None
+
+ingresar()
+buscador = Buscador(productosDiccionario)
+buscador.buscar_por_codigo()
