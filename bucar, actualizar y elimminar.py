@@ -145,9 +145,24 @@ class actualizar_producto:
         else:
             print("\nERROR---NO SE ENCONTRO EL PRODUCTO---")
 
+class eliminar_producto:
+    def __init__(self, productosDiccionario):
+        self.productosDiccionario = productosDiccionario
+
+    def eliminar(self):
+        codigo = input("Ingrese el codigo del producto a eliminar: ")
+
+        if codigo in self.productosDiccionario:
+            producto = self.productosDiccionario.pop(codigo)["producto"]
+            print(f"\nPRODUCTO '{producto.nombre}' ELIMINADO CORRECTAMENTE.")
+        else:
+            print("\nNo se encontr ningin producto con ese cpdigo.")
+
 ingresar()
 print()
 buscador = Buscador(productosDiccionario)
 buscador.buscar_por_codigo()
 actualizador = actualizar_producto(productosDiccionario)
 actualizador.actualizar()
+eliminador = eliminar_producto(productosDiccionario)
+eliminador.eliminar()
