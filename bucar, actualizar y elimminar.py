@@ -94,7 +94,7 @@ class Buscador:
         for cod, datos in self.productosDiccionario.items():
             producto = datos["producto"]
             if cod == codigo:
-                print("\nProducto encontrado:")
+                print("\n_-PRODUCTO ENCONTRADO-_:")
                 print(f"Codigo: {producto.codigo}")
                 print(f"Nombre: {producto.nombre}")
                 print(f"Categoria: {producto.categoria}")
@@ -102,7 +102,7 @@ class Buscador:
                 print(f"Stock: {producto.stock}")
                 return producto
 
-        print("\nNo se encontró ningún producto con ese código.")
+        print("\nNO SE ENCONTRO NINGUN PRODUCTO CON ESE CODIGO...")
         return None
 
     def buscar_por_nombre(self):
@@ -115,14 +115,14 @@ class Buscador:
                 encontrado.append(producto)
 
         if encontrado:
-            print("\nProductos encontrados por nombre:")
+            print("\nPRODUCTOS ENCONTRADOS POR NOMBRE:")
             for p in encontrado:
-                print(f"Código: {p.codigo}, Nombre: {p.nombre}, "
-                      f"Categoría: {p.categoria}, Precio: {p.precio}, Stock: {p.stock}")
+                print(f"Código: {p.codigo}, Nombre: {p.nombre}, Categoría: {p.categoria}, Precio: {p.precio}, Stock: {p.stock}")
             return encontrado
         else:
             print("\n---NO SE ENCONTRO NINGUN PRODUCTO CON ESE NOMBRE---")
             return None
+
 
 
 
@@ -135,7 +135,7 @@ class actualizar_producto:
 
         if codigo in self.productosDiccionario:
             producto = self.productosDiccionario[codigo]["producto"]
-            print("\nproducto encontado:")
+            print("\nPRODUCTO ENCONTRADO:")
             print(f"Mombre: {producto.nombre}, Categoría: {producto.categoria}, Precio: {producto.precio}, Stock: {producto.stock}")
 
             while True:
@@ -145,24 +145,26 @@ class actualizar_producto:
                         producto.precio = precio_nuevo
                         break
                     else:
-                        print("el precio debe ser mayor a 0.")
+                        print("EL PRECIO DEBE SER MAYOR A 0...")
                 except ValueError:
-                    print("ERROR...ingrese un numero valido para el precio.")
+                    print("ERROR...INGRESE UN NUMERO VALIDO.")
 
             while True:
                 try:
-                    stock_nuevo = int(input("imgrese el nuevo stock: "))
+                    stock_nuevo = int(input("INGRESE LA CANTIDAD EN STOCK: "))
                     if stock_nuevo >= 0:
                         producto.stock = stock_nuevo
                         break
                     else:
-                        print("el stock no puede ser negativo.")
+                        print("NO PUEDE SER NEGATIVO EL ESTOCK...")
                 except ValueError:
-                    print("ERROR...ingrese un numero valido para el stock.")
+                    print("ERROR...INGRESE UN NUMERO VALIDO.")
 
             print("\nPRODUCTO ACTUALIZADO CORRECTAMENTE...")
         else:
             print("\nERROR---NO SE ENCONTRO EL PRODUCTO---")
+
+
 
 class eliminar_producto:
     def __init__(self, productosDiccionario):
@@ -175,7 +177,7 @@ class eliminar_producto:
             producto = self.productosDiccionario.pop(codigo)["producto"]
             print(f"\nPRODUCTO '{producto.nombre}' ELIMINADO CORRECTAMENTE.")
         else:
-            print("\nNo se encontr ningin producto con ese cpdigo.")
+            print("\nNO SE ENCONTRO EL PRODUCTO...")
 
 ingresar()
 print()
@@ -184,8 +186,7 @@ while True:
     print("..BUSCAR POR..")
     print("1. buscar por codigo")
     print("2. buscar por nombre")
-    print("3. buscar por categoria")
-    print("4. Salir")
+    print("3. Salir")
 
     try:
         opcion = int(input("Seleccionar una opción: "))
@@ -195,14 +196,12 @@ while True:
             case 2:
                 buscador.buscar_por_nombre()
             case 3:
-                print()
-            case 4:
-                print("salir")
+                print("SALIENDO")
                 break
             case _:
                 print("Opción no válida.\n")
     except ValueError:
-        print("Error: Debes ingresar un número entero.\n")
+        print("Error: DEBE INGRESAR UN NUMERO ENTERO.\n")
 
 actualizador = actualizar_producto(productosDiccionario)
 actualizador.actualizar()
