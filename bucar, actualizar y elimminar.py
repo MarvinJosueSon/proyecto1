@@ -105,6 +105,25 @@ class Buscador:
         print("\nNo se encontró ningún producto con ese código.")
         return None
 
+    def buscar_por_nombre(self):
+        nombre = input("Ingrese el nombre del producto a buscar: ").lower()
+        encontrado = []
+
+        for datos in self.productosDiccionario.values():
+            producto = datos["producto"]
+            if nombre in producto.nombre.lower():
+                encontrado.append(producto)
+
+        if encontrado:
+            print("\nProductos encontrados por nombre:")
+            for p in encontrado:
+                print(f"Código: {p.codigo}, Nombre: {p.nombre}, "
+                      f"Categoría: {p.categoria}, Precio: {p.precio}, Stock: {p.stock}")
+            return encontrado
+        else:
+            print("\n---NO SE ENCONTRO NINGUN PRODUCTO CON ESE NOMBRE---")
+            return None
+
 
 
 class actualizar_producto:
@@ -161,7 +180,30 @@ class eliminar_producto:
 ingresar()
 print()
 buscador = Buscador(productosDiccionario)
-buscador.buscar_por_codigo()
+while True:
+    print("..BUSCAR POR..")
+    print("1. buscar por codigo")
+    print("2. buscar por nombre")
+    print("3. buscar por categoria")
+    print("4. Salir")
+
+    try:
+        opcion = int(input("Seleccionar una opción: "))
+        match opcion:
+            case 1:
+                buscador.buscar_por_codigo()
+            case 2:
+                buscador.buscar_por_nombre()
+            case 3:
+                print()
+            case 4:
+                print("salir")
+                break
+            case _:
+                print("Opción no válida.\n")
+    except ValueError:
+        print("Error: Debes ingresar un número entero.\n")
+
 actualizador = actualizar_producto(productosDiccionario)
 actualizador.actualizar()
 eliminador = eliminar_producto(productosDiccionario)
