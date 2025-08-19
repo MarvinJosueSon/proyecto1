@@ -77,6 +77,7 @@ def ingresar():
 
     productoAux = Productos(codigoAux, nombreAux, categoriaAux, precioAux, stockAux)
     productosDiccionario[codigoAux] = {"producto": productoAux}
+    print("Producto ingresado correctamente")
 
 
 def quicksort(lista, clave):
@@ -138,7 +139,7 @@ class Buscador:
 
         if codigo in self.productosDiccionario:
             producto = self.productosDiccionario[codigo]["producto"]
-            print("\n_-PRODUCTO ENCONTRADO-_:")
+            print("_-PRODUCTO ENCONTRADO-_:")
             print(f"Codigo: {producto.codigo}")
             print(f"Nombre: {producto.nombre}")
             print(f"Categoria: {producto.categoria}")
@@ -215,6 +216,7 @@ class eliminar_producto:
         codigo = input("Ingrese el codigo del producto a eliminar: ")
 
         if codigo in self.productosDiccionario:
+
             producto = self.productosDiccionario.pop(codigo)["producto"]
             print(f"\nPRODUCTO '{producto.nombre}' ELIMINADO CORRECTAMENTE.")
         else:
