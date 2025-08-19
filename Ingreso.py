@@ -257,7 +257,7 @@ while True:
                         case _:
                             print("Opción no válida.\n")
                 except ValueError:
-                    print("Error: DEBE INGRESAR UN NUMERO ENTERO.\n")
+                    print("Error: DEBE INGRESAR UN NUMERO ENTERO.")
 
         case "4":
             actualizador = actualizar_producto(productosDiccionario)
